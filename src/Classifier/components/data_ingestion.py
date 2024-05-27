@@ -2,9 +2,9 @@ import os
 import zipfile
 import gdown
 import shutil
-from src.Classifier import logger
-from src.Classifier.utils.common import get_size
-from src.Classifier.entity.config_entity import DataIngestionConfig
+from Classifier import logger
+from Classifier.utils.common import get_size
+from Classifier.entity.config_entity import DataIngestionConfig
 
 
 class DataIngestion:

@@ -1,8 +1,8 @@
 
-from src.Classifier.config.configuration import ConfigurationManager
+from Classifier.config.configuration import ConfigurationManager
 # from src.Classifier.config.configuration import ConfigurationManager
-from src.Classifier.components.data_ingestion import DataIngestion
-from src.Classifier import logger
+from Classifier.components.data_ingestion import DataIngestion
+from Classifier import logger
 
 
 

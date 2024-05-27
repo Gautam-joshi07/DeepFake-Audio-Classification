@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Gautam/PycharmProject/DeepFake-Audio-Classification/mlruns/0/6a725852a34146b9920c7d4134896b64/artifacts
+end_time: 1716812947033
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 6a725852a34146b9920c7d4134896b64
+run_name: whimsical-duck-880
+run_uuid: 6a725852a34146b9920c7d4134896b64
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1716812911536
+status: 3
+tags: []
+user_id: Gautam

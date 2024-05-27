@@ -1,6 +1,10 @@
-from src.Classifier.config.configuration import ConfigurationManager
-from src.Classifier.components.model_trainer import Training
-from src.Classifier import logger
+from Classifier.config.configuration import ConfigurationManager
+from Classifier.components.model_trainer import Training
+from Classifier import logger
+
+
+
+
 
 
 

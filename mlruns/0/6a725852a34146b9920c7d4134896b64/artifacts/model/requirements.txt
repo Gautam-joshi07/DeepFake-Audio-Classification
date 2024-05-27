@@ -1,0 +1,13 @@
+mlflow<3,>=2.2
+cffi==1.16.0
+fsspec==2024.5.0
+numpy==1.22.4
+packaging==23.2
+pandas==1.1.5
+pillow==8.2.0
+protobuf==3.20.3
+pydotplus==2.0.2
+requests==2.31.0
+scipy==1.10.1
+tblib==1.7.0
+tensorflow==2.12.0

@@ -6,7 +6,7 @@ import os
 # from box.exceptions import BoxValueError
 from box.exceptions import BoxValueError
 import yaml
-from src.Classifier import logger
+from Classifier import logger
 import json
 import joblib
 from ensure import ensure_annotations

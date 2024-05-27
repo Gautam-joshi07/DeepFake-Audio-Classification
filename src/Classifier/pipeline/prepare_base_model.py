@@ -1,6 +1,6 @@
-from src.Classifier.config.configuration import ConfigurationManager
-from src.Classifier.components.prepare_base_model import PrepareBaseModel
-from src.Classifier import logger
+from Classifier.config.configuration import ConfigurationManager
+from Classifier.components.prepare_base_model import PrepareBaseModel
+from Classifier import logger
 
 
 

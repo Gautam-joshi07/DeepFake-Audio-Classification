@@ -1,12 +1,11 @@
 
 import os
-from src.Classifier.constants import *
-from src.Classifier.utils.common import read_yaml, create_directories
-from src.Classifier.entity.config_entity import (DataIngestionConfig,
+from Classifier.constants import *
+from Classifier.utils.common import read_yaml, create_directories
+from Classifier.entity.config_entity import (DataIngestionConfig,
                                                 PrepareBaseModelConfig,
                                                 TrainingConfig,
                                                 EvaluationConfig)
-
 
 class ConfigurationManager:
     def __init__(
@@ -19,8 +18,8 @@ class ConfigurationManager:
 
         create_directories([self.config.artifacts_root])
 
+        
 
-    
     def get_data_ingestion_config(self) -> DataIngestionConfig:
         config = self.config.data_ingestion
 
@@ -30,11 +29,34 @@ class ConfigurationManager:
             root_dir=config.root_dir,
             local_source_path=config.local_source_path,
             local_data_file=config.local_data_file,
-            unzip_dir=config.unzip_dir
+            unzip_dir=config.unzip_dir 
         )
 
         return data_ingestion_config
-    
+
+
+
+    def get_training_config(self) -> TrainingConfig:
+        training = self.config.training
+        prepare_base_model = self.config.prepare_base_model
+        params = self.params
+        training_data = os.path.join(self.config.data_ingestion.unzip_dir, "Dataset")
+        create_directories([
+            Path(training.root_dir)
+        ])
+
+        training_config = TrainingConfig(
+            root_dir=Path(training.root_dir),
+            trained_model_path=Path(training.trained_model_path),
+            updated_base_model_path=Path(prepare_base_model.updated_base_model_path),
+            training_data=Path(training_data),
+            params_epochs=params.EPOCHS,
+            params_batch_size=params.BATCH_SIZE,
+            params_is_augmentation=params.AUGMENTATION,
+            params_image_size=params.IMAGE_SIZE
+        )
+
+        return training_config
         #     try:
         #     source_path = self.config.local_source_path
         #     destination_path = self.config.local_data_file
@@ -95,7 +117,7 @@ class ConfigurationManager:
         eval_config = EvaluationConfig(
             path_of_model="artifacts/training/model.h5",
             training_data="artifacts/data_ingestion/Dataset",
-            mlflow_uri="https://dagshub.com/entbappy/chest-Disease-Classification-MLflow-DVC.mlflow",
+            mlflow_uri="https://dagshub.com/gautampj111/DeepFake-Audio-Classification.mlflow",
             all_params=self.params,
             params_image_size=self.params.IMAGE_SIZE,
             params_batch_size=self.params.BATCH_SIZE

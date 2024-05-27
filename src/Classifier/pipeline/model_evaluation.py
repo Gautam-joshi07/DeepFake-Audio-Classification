@@ -1,6 +1,6 @@
-from src.Classifier.config.configuration import ConfigurationManager
-from src.Classifier.components.model_evaluation import Evaluation
-from src.Classifier import logger
+from Classifier.config.configuration import ConfigurationManager
+from Classifier.components.model_evaluation import Evaluation
+from Classifier import logger
 
 
 

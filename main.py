@@ -1,8 +1,8 @@
-from src.Classifier import logger
-from src.Classifier.pipeline.data_ingestion import DataIngestionTrainingPipeline
-from src.Classifier.pipeline.prepare_base_model import PrepareBaseModelTrainingPipeline
-from src.Classifier.pipeline.model_trainer import ModelTrainingPipeline
-from src.Classifier.pipeline.model_evaluation import EvaluationPipeline
+from Classifier import logger
+from Classifier.pipeline.data_ingestion import DataIngestionTrainingPipeline
+from Classifier.pipeline.prepare_base_model import PrepareBaseModelTrainingPipeline
+from Classifier.pipeline.model_trainer import ModelTrainingPipeline
+from Classifier.pipeline.model_evaluation import EvaluationPipeline
 
 
 
