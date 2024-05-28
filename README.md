@@ -1,6 +1,6 @@
 # DeepFake-Audio-Classification
 
-<<<<<<< HEAD
+
 This project classifies audio files as either "real" or "fake" using a deep learning model. The project pipeline includes data ingestion, base model, model training, model evaluation, and deployment using Flask. The following tools and technologies are used:
 
 
