@@ -1,5 +1,5 @@
 import numpy as np
-from tensorflow.keras.models import load_model
+# from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 import os
 
@@ -9,52 +9,54 @@ import matplotlib.pyplot as plt
 import librosa
 import librosa.display
 # from tensorflow.keras.models import load_model
-from keras import load_model
+# from keras import load_model
+# from tensorflow.keras.preprocessing.image import load_img, img_to_array
+
+
+
+import numpy as np
+from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
-import streamlit as st
+import os
+import librosa
+import librosa.display
+import matplotlib.pyplot as plt
 
-class AudioPredictionPipeline:
-    def __init__(self, file_sound):
-        self.file_sound = file_sound
-        self.audio_file_path = os.path.join('audio_files', self.file_sound.name)
-        self.spectrogram_path = 'mel_spectrogram.png'
-        self.model = load_model(os.path.join('model', 'model.h5'))
-    
-    def file_save(self):
-        with open(self.audio_file_path, 'wb') as f:
-            f.write(self.file_sound.getbuffer())
-        return self.audio_file_path
+class PredictionPipeline:
+    def __init__(self, filename):
+        self.filename = filename
 
-    def create_spec(self):
-        y, sr = librosa.load(self.audio_file_path)
+    def create_spectrogram(self):
+        y, sr = librosa.load(self.filename)
         mel = librosa.feature.melspectrogram(y=y, sr=sr)
         log_ms = librosa.power_to_db(mel, ref=np.max)
-        
+
         plt.figure(figsize=(10, 4))
         librosa.display.specshow(log_ms, sr=sr, x_axis='time', y_axis='mel')
         plt.colorbar(format='%+2.0f dB')
         plt.title('Mel spectrogram')
         plt.tight_layout()
-        plt.savefig(self.spectrogram_path, bbox_inches='tight', pad_inches=0)
+        plt.savefig('mel_spectrogram.png')
         plt.close()
+
+    def predict(self):
+        self.create_spectrogram()
         
-        image_data = load_img(self.spectrogram_path, target_size=(224, 224))
-        return image_data
+        model = load_model(os.path.join("model", "model.h5"))
+        image_path = 'mel_spectrogram.png'
+        test_image = load_img(image_path, target_size=(224, 224))
+        test_image = img_to_array(test_image)
+        test_image = np.expand_dims(test_image, axis=0)
+        test_image = test_image / 255.0
+        
+        result = np.argmax(model.predict(test_image), axis=1)
+        
+        if result[0] == 1:
+            prediction = 'Real'
+        else:
+            prediction = 'Fake'
+        
+        return [{"prediction": prediction}]
 
-    def pred(image_data, model):
-        img_array = np.array(image_data)
-        img_array1 = img_array / 255
-        img_batch = np.expand_dims(img_array1, axis=0)
 
-        prediction = model.predict(img_batch)
-        class_label = np.argmax(prediction)
-
-        return class_label, prediction
-
-# Example of how to use the class
-
-# pipeline = AudioPredictionPipeline(file_sound)
-# saved_file = pipeline.file_save()
-# image_data = pipeline.create_spec()
-# result = pipeline.predict(image_data)
 

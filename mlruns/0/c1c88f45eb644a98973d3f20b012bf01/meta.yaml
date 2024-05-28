@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Gautam/PycharmProject/DeepFake-Audio-Classification/mlruns/0/c1c88f45eb644a98973d3f20b012bf01/artifacts
+end_time: 1716873886286
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: c1c88f45eb644a98973d3f20b012bf01
+run_name: serious-squirrel-862
+run_uuid: c1c88f45eb644a98973d3f20b012bf01
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1716873870829
+status: 3
+tags: []
+user_id: Gautam
