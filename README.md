@@ -116,6 +116,5 @@ dvc init
 
 ## Feedback
 If you have any feedback, please reach out to us at gautampjoshi7@gmail.com
-=======
->>>>>>> a74ddeb4850d474a47c9b732961447e889fc9cc3
+
 
