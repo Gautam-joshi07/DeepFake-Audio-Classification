@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Gautam/PycharmProject/DeepFake-Audio-Classification/mlruns/0/9ada19f7f119448b8834e9f6a61208d7/artifacts
+end_time: 1716961103871
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 9ada19f7f119448b8834e9f6a61208d7
+run_name: silent-frog-737
+run_uuid: 9ada19f7f119448b8834e9f6a61208d7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1716961082522
+status: 3
+tags: []
+user_id: Gautam

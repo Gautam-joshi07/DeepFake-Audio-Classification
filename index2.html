@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!--  URL for static-->
+  <!--  put css in static folder-->
+  <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+  <title>DeepFake Audio Classification</title>
+  <style>
+    /* Your CSS styles go here */
+    /* Global */
+    /*Basically, add html height 100%. This will stretch your gradient.*/
+    html {
+        height: 100%;
+    }
+
+    /* Body color is set to change with linear gradient */
+    body {
+        font-family: 'Trebuchet MS', sans-serif;
+        background: rgba(0, 0, 0, 0.68);
+        background: linear-gradient(-45deg, #af03ff, #9b1146, #53006c, #0d29c7, #00ecb5);
+        background-size: 400% 400%;
+        /*background-repeat: no-repeat;*/
+        height: 100%;
+        margin: 0;
+        animation: gradient 15s ease infinite;
+        background-attachment: fixed;
+    }
+
+    /* This helps to color to move in the background */
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        color: white;
+    }
+
+    h5 {
+        font-weight: 600;
+    }
+
+    /* ***********************************End of Global****************************** */
+    /* Style for index.html */
+    /* Navigation Bar */
+    .navigation {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding-top: 0px;
+        padding-bottom: 0%;
+    }
+
+    .nav-hr {
+        margin: 0;
+        color: white;
+        height: 1px;
+    }
+
+    .mynavitem {
+        text-decoration: none;
+        color: white;
+        font-size: larger;
+    }
+
+    .mynavitem:hover {
+        font-weight: bolder;
+        color: azure;
+    }
+
+    .mylogo {
+        color: white;
+        letter-spacing: 3px;
+        font-style: normal;
+
+    }
+
+    .mylogo:hover {
+        color: white;
+        font-weight: 600;
+
+
+    }
+
+    /* **************************************End of Navigation Bar****************************************** */
+  
+
+    
+
+   
+    /* Upload and download section */
+    /* Upload Section */
+    .upload-button {
+        padding: 1% 4%;
+        background-color: white;
+        font-size: medium;
+        font-weight: 700;
+        /* margin:30%; */
+    }
+
+    .upload-button:hover {
+        border: solid 2px white;
+        background-color: transparent;
+        color: white
+    }
+
+    .upload-card {
+        background: #26272b;
+        padding-inline: 14%;
+        text-align: center;
+        padding: 9% 8%;
+        border-radius: 7px;
+        margin-bottom: 7%;
+    }
+
+    .rectangle-div {
+        background-color: transparent;
+        color: white;
+    }
+
+    /* This css is used for giving round shape to buttons */
+    .rounded-button {
+        border-top-right-radius: 50px;
+        border-bottom-right-radius: 50px;
+        border-top-left-radius: 50px;
+        border-bottom-left-radius: 50px;
+    }
+
+
+
+
+  
+
+  
+    /*******************************************End of Common CSS for all screen size*******************************/
+    /* Desktop size  */
+    @media only screen and (min-width: 992px) {
+        /*Navigation Bar for desktop*/
+        .mynavitems {
+            flex-grow: unset;
+        }
+
+        .nav_element_group {
+            /* background: #
+2e0c06; */
+opacity: 99%;
+            padding-bottom: 1%;
+            height: 24%;
+            padding-top: 1%;
+        }
+
+        /*Top Section Desktop*/
+        .top-text-button {
+            padding: 3% 7%;
+            background-color: white;
+            font-size: medium;
+            font-weight: 700;
+            margin-right: 54%;
+            color: darkblue;
+
+        }
+
+        .top-text-button:hover {
+
+            border: solid 2px white;
+            background-color: transparent;
+            color: white
+        }
+
+        .top-container {
+            width: 77%;
+            text-align: center;
+            /* margin-left: 29%; */
+        }
+
+        /*User Guide Desktop*/
+        .user-guide-row {
+            margin-bottom: 4%;
+        }
+
+        .step-card {
+            padding: 6%;
+            background: transparent;
+            border: solid 2px white;
+            color: white;
+            height: 18rem;
+        }
+
+        .step-card:hover {
+            background-color: #26272b;
+            border: none;
+        }
+
+        .step-div {
+            margin-bottom: 2%;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .third-party-link {
+            color: rgb(252, 255, 74);
+            text-decoration: none;
+        }
+
+        .step-card {
+            padding: 6%;
+            background: transparent;
+            border: solid 2px white;
+            color: white;
+            height: 18rem;
+        }
+
+    }
+    /***************************************End of CSS for Desktop Size Screen****************************************/
+
+    /* For Phone Screen*/
+    @media(max-width:767px) {
+        /*Navbar Section Phone Screen*/
+        .piano-logo {
+            height: 45px;
+            margin: 1px;
+        }
+
+        /*Top Section Phone Screen*/
+        .top-text-side {
+            color: white;
+            width: 100%;
+        }
+
+        .top-text-h1 {
+            font-size: xx-large;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .music-icon-1 {
+            margin: 1% 36%;
+            height: 4rem;
+            width: 4rem;
+        }
+
+        .top-text-button {
+            margin: 3% 35%;
+            background-color: white;
+        }
+
+        /*Upload & download button phone screen*/
+ 
+
+     
+
+
+    }
+
+    /**************************************End of CSS for Phone Screen*************************************/
+    /*CSS for Footer*/
+    .site-footer {
+        background-color: #26272b;
+        padding: 45px 0 20px;
+        font-size: 20x;
+        line-height: 24px;
+        color: #737373;
+    }
+
+    .site-footer hr {
+        border-top-color: #bbb;
+        opacity: 0.5
+    }
+
+    .site-footer hr.small {
+        margin: 20px 0
+    }
+
+    .site-footer h6 {
+        color: #fff;
+        font-size: 16px;
+        text-transform: uppercase;
+        margin-top: 5px;
+        letter-spacing: 2px
+    }
+
+    .site-footer a {
+        color: #737373;
+    }
+
+    .site-footer a:hover {
+        color: #3366cc;
+        text-decoration: none;
+    }
+
+    .footer-links {
+        padding-left: 0;
+        list-style: none
+    }
+
+    .footer-links li {
+        display: block
+    }
+
+    .footer-links a {
+        color: #737373
+    }
+
+    .footer-links a:active,
+    .footer-links a:focus,
+    .footer-links a:hover {
+        color: #3366cc;
+        text-decoration: none;
+    }
+
+    .footer-links.inline li {
+        display: inline-block
+    }
+
+    .site-footer .social-icons {
+        text-align: right
+    }
+
+    .site-footer .social-icons a {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        margin-left: 6px;
+        margin-right: 0;
+        border-radius: 100%;
+        background-color: #33353d
+    }
+
+    .copyright-text {
+        margin: 0
+    }
+
+    .about-title {
+        text-align: center;
+    }
+
+    @media (max-width:991px) {
+        .site-footer [class^=col-] {
+            margin-bottom: 30px
+        }
+    }
+
+    @media (max-width:767px) {
+        .site-footer {
+            padding-bottom: 0
+        }
+
+        .site-footer .copyright-text,
+        .site-footer .social-icons {
+            text-align: center
+        }
+    }
+
+    .social-icons {
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none
+    }
+
+    .social-icons li {
+        display: inline-block;
+        margin-bottom: 4px
+    }
+
+    .social-icons li.title {
+        margin-right: 15px;
+        text-transform: uppercase;
+        color: #96a2b2;
+        font-weight: 700;
+        font-size: 13px
+    }
+
+    .social-icons a {
+        background-color: #eceeef;
+        color: #818a91;
+        font-size: 16px;
+        display: inline-block;
+        line-height: 44px;
+        width: 44px;
+        height: 44px;
+        text-align: center;
+        margin-right: 8px;
+        border-radius: 100%;
+        -webkit-transition: all .2s linear;
+        -o-transition: all .2s linear;
+        transition: all .2s linear
+    }
+
+    .social-icons a:active,
+    .social-icons a:focus,
+    .social-icons a:hover {
+        color: #fff;
+        background-color: #29aafe
+    }
+
+    .social-icons.size-sm a {
+        line-height: 34px;
+        height: 34px;
+        width: 34px;
+        font-size: 14px
+    }
+
+    .social-icons a.facebook:hover {
+        background-color: #3b5998
+    }
+
+    .social-icons a.twitter:hover {
+        background-color: #00aced
+    }
+
+    .social-icons a.linkedin:hover {
+        background
+        -color: #007bb6
+    }
+
+    .social-icons a.dribbble:hover {
+        background-color: #ea4c89
+    }
+
+    @media (max-width:767px) {
+        .social-icons li.title {
+            display: block;
+            margin-right: 0;
+            font-weight: 600
+        }
+    }
+    /**************************************End of CSS for Footer*************************************/
+
+
+    /* Custom Styles */
+
+    .file-upload {
+        background-color: #ffffff;
+        width: 100%;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .file-upload-btn {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        background: none;
+        border: 2px solid #008CBA;
+        color: #008CBA;
+        border-radius: 20px;
+        transition: all .3s ease;
+        outline: none;
+        font-size: 18px;
+        cursor: pointer;
+        padding: 10px 0;
+    }
+
+    .file-upload-btn:hover {
+        background-color: #008CBA;
+        color: white;
+    }
+
+    .file-upload-btn:active {
+        background-color: #008CBA;
+        color: white;
+    }
+
+    .file-upload-content {
+        display: none;
+        text-align: center;
+    }
+
+    .file-upload-input {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .image-upload-wrap {
+        margin-top: 20px;
+        border: 4px dashed #455a64;
+        position: relative;
+    }
+
+    .image-dropping,
+    .image-upload-wrap:hover {
+        background-color: #f7f7f7;
+        border: 4px dashed #009688;
+    }
+
+    .image-title-wrap {
+        padding: 0 15px 15px 15px;
+        color: #222;
+    }
+
+    .drag-text {
+        text-align: center;
+    }
+
+    .drag-text h3 {
+        font-weight: 100;
+        text-transform: uppercase;
+        color: #008CBA;
+        padding: 60px 0;
+    }
+
+    .file-upload-image {
+        max-height: 200px;
+        max-width: 200px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .remove-image {
+        width: 200px;
+        margin: 0;
+        color: white;
+        background: #ff0000;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        border-bottom: 4px solid #cc0000;
+        transition: all .3s ease;
+        outline: none;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    .remove-image:hover {
+        background: #cc0000;
+        color: white;
+        transition: all .3s ease;
+    }
+
+    .remove-image:active {
+        background: #cc0000;
+        color: white;
+    }
+
+    .preview-image {
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-top: 15px;
+    }
+
+    .footer-wrapper {
+        position: relative;
+        background: #f2f2f2;
+        padding: 50px 0;
+    }
+
+    .upload-btn-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    .btn {
+        border: 2px solid #009688;
+        color: #009688;
+        background-color: white;
+        padding: 8px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .upload-btn-wrapper input[type=file] {
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
+
+    .upload-btn-wrapper i {
+        padding-right: 10px;
+    }
+
+    .btn:hover {
+        background-color: #009688;
+        color: white;
+    }
+
+    .btn:active {
+        background-color: #009688;
+        color: white;
+    }
+
+    .output {
+        display: none;
+    }
+
+    .output img {
+        max-width: 100%;
+    }
+
+    /* Other CSS */
+    /* Add your custom CSS here */
+
+    /* End of Other CSS */
+  </style>
+</head>
+<body>
+
+
+      <!-- Navigation Bar -->
+  <header>
+
+    <nav class="navbar navbar-expand-lg navigation ">
+      <div class="container-fluid nav_element_group">
+        <!-- <a class="navbar-brand mylogo" href="http://127.0.0.1:5000/">DeepFake Audio</a><img
+          src="https://tse2.mm.bing.net/th?id=OIP.MKhcju07WEHGj11fXdA9KgHaDZ&pid=Api&P=0&h=180" class="piano-logo" height="50" width="50" /> -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white"
+              class="bi bi-list" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            </svg></span>
+        </button>
+        <div class="collapse navbar-collapse mynavitems" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item ">
+              <a class="nav-link active mynavitem" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link mynavitem " href="#User-Guide">User Guide</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link mynavitem " href="#About">About</a>
+            </li>
+
+
+          </ul>
+        </div>
+      </div
+    </nav>
+    <hr class="nav-hr">
+  </header>
+   <!-- Navigation Bar Ends here -->
+
+
+   <section>
+    <div class="container d-flex top-container">
+      <div class="row">
+        <div class="col m-lg-5 m-md-4 m-sm-0   top-text-div">
+          <div class="my-2 top-text-side">
+            <h1 class="my-md-3 top-text-h1">
+              An AI that can classify voice as fake or real 
+            </h1>
+            <img src="https://tse2.mm.bing.net/th?id=OIP.MKhcju07WEHGj11fXdA9KgHaDZ&pid=Api&P=0&h=180" class="music-icon-1" />
+            <h2 class="my-md-3  top-text-h2">
+              DeepFake-Audio-Classification an AI-driven software that can classify voice as real or fake. All you have to do is to provide your audio file
+              idea snippet.
+
+            </h2>
+            <button class="btn top-text-button m-md-3 rounded-button">
+              <a href="#melody-palette" style="text-decoration:none;color: unset;"> Get Started</a>
+
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <hr class="top-hr">
+  </section>
+
+
+  
+
+
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+
+
+ <h1>Upload an audio file</h1>
+ <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+     <div class="file-upload">
+         <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger('click')">Add Audio</button>
+         <div class="image-upload-wrap">
+             <input class="file-upload-input" type='file' name="file" accept="audio/*" onchange="handleAudioUpload(this)" />
+             <div class="drag-text">
+                 <h3>Drag and drop an audio file or select Add Audio</h3>
+             </div>
+         </div>
+         <input type="submit" value="Upload">
+     </div>
+ </form>
+ 
+ <div id="result">
+     Result will be displayed here
+ </div>
+ 
+ <script>
+     async function handleAudioUpload(input) {
+         const formData = new FormData();
+         formData.append('file', input.files[0]);
+ 
+         const response = await fetch('/index', {
+             method: 'POST',
+             body: formData,
+         });
+ 
+         const result = await response.json();
+         const resultDiv = document.getElementById('result');
+         resultDiv.innerHTML = `<p>Prediction: ${result.prediction}</p><img src="/static/mel_spectrogram.png" alt="Mel Spectrogram">`;
+     }
+ </script>
+
+
+
+    <footer class="site-footer">
+        <div class="container ">
+          <div class="row">
+      
+            <div class="col">
+              <h6 class="about-title"><a id="About"></a>About</h6>
+              <p class="text-center" style="width :40%;margin:0% 30%">DeepFake Audio Classification is a tool to classifythe audio files as real or fake using
+                Artificial Intelligence. All the user has to to is to provide a short input. Then this tool will automatically
+                gives the output as real or fake audio on its own.</p>
+            </div>
+      
+      
+      
+      
+          <hr>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8 col-sm-6 col-xs-12">
+                <p class="copyright-text">Gautam Joshi &copy; 2024
+                  
+                </p>
+              </div>
+      
+              <div class="col-md-4 col-sm-6 col-xs-12">
+                
+                  <a class="facebook" href="https://github.com/Gautam-joshi07/DeepFake-Audio-Classification" target="_blank"><i
+                        class="fa fa-github"></i></a> <pre></pre>
+                    </pre>
+                        <a class="linkedin" href="https://in.linkedin.com/in/jagtap-trupti" target="_blank"><i
+                            class="fa fa-linkedin"></i></a>
+               
+              </div>
+            </div>
+          </div>
+      </footer>
+
+      
+</body>
+</html> 

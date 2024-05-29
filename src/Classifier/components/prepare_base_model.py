@@ -15,7 +15,7 @@ class PrepareBaseModel:
 
     
     def get_base_model(self):
-        self.model = tf.keras.applications.vgg16.VGG16(
+        self.model = tf.keras.applications.MobileNet(
             input_shape=self.config.params_image_size,
             weights=self.config.params_weights,
             include_top=self.config.params_include_top
@@ -37,7 +37,7 @@ class PrepareBaseModel:
         flatten_in = tf.keras.layers.Flatten()(model.output)
         prediction = tf.keras.layers.Dense(
             units=classes,
-            activation="softmax"
+            activation="sigmoid"
         )(flatten_in)
 
         full_model = tf.keras.models.Model(
@@ -47,7 +47,7 @@ class PrepareBaseModel:
 
         full_model.compile(
             optimizer=tf.keras.optimizers.SGD(learning_rate=learning_rate),
-            loss=tf.keras.losses.CategoricalCrossentropy(),
+            loss=tf.keras.losses.BinaryCrossentropy(),
             metrics=["accuracy"]
         )
 
