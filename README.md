@@ -85,6 +85,21 @@ This will execute the following steps:
 python app.py
 ```
 
+
+### The streamlit_app.py starts a streamlit app:
+
+```bash 
+
+streamlit run streamlit_run.app
+```
+
+
+## You can Try on below Link !
+
+https://huggingface.co/spaces/Joshi07/DeepFake_audio_Classification
+
+
+
 ## MLflow
 
 * Use MLflow for Parameter Tracking and Model Management
