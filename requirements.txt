@@ -6,14 +6,19 @@ dvc
 mlflow==2.2.2
 notebook
 numpy
-matplotlib==3.3.4
+# matplotlib==3.3.4
+matplotlib
 seaborn
 python-box==6.0.2
+librosa==0.10.1
 pyYAML
+pytest
 tqdm
+Werkzeug==2.2.2
 ensure==1.0.2
 joblib
 types-PyYAML
+Keras-preprocessing==1.1.2
 scipy
 Flask==2.2.2
 Flask-Cors
